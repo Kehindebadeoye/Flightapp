@@ -64,16 +64,28 @@ public class FlightServlet extends HttpServlet {
 
 	// not SAFE
 	// not idempotent
+//	@Override
+//	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		if (req.getInputStream() != null) {
+//			InputStream requestBody = req.getInputStream();
+//			Flight flight = new ObjectMapper().readValue(requestBody, Flight.class);
+//			
+//			Flight updatedFlight = dao.updateFlight(flight);
+//			resp.getWriter().print(new ObjectMapper().writeValueAsString(updatedFlight));
+//			System.out.println(updatedFlight.getId());
+//			System.out.println(updatedFlight);
+//		}
+//	}
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (req.getInputStream() != null) {
 			InputStream requestBody = req.getInputStream();
 			Flight flight = new ObjectMapper().readValue(requestBody, Flight.class);
+			Flight updatedFlight = dao.updateFlightDepartureAndArrivalDate(flight);
 			
-			Flight updatedFlight = dao.updateFlight(flight);
 			resp.getWriter().print(new ObjectMapper().writeValueAsString(updatedFlight));
-			System.out.println(updatedFlight.getId());
-			System.out.println(updatedFlight);
+//			System.out.println(updatedFlight.getId());
+//			System.out.println(newUpdate);
 		}
 	}
 

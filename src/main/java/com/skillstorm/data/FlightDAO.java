@@ -72,6 +72,35 @@ public class FlightDAO {
 		}
 		return flight;
 	}
+	public Flight updateFlightDepartureAndArrivalDate(Flight flight) {
+		try(Connection conn = DriverManager.getConnection(url, username,password)){
+			String sql = "Update flight" + " set departure = ?, arrival = ?" + " where id = ?";	
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(3, flight.getId());		
+			stmt.setString(1, flight.getDeparture());
+			stmt.setString(2, flight.getArrival());
+			stmt.executeUpdate();
+			String sql2 = "select id,source,destination,departure,arrival, flight_number from flight where id = ?";
+			PreparedStatement stmt2 = conn.prepareStatement(sql2);
+			stmt2.setInt(1, flight.getId());		
+			ResultSet results= stmt2.executeQuery();
+			results.next();
+			return new Flight(results.getInt("id"),results.getString("source"),results.getString("destination"),
+					results.getString("departure"),results.getString("arrival"),
+					results.getString("flight_number"));
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return flight;
+		
+//			Flight flight1 = new Flight(flight.getId(),flight.getSource(),flight.getDestination(),
+//					flight.getDeparture(),flight.getArrival(),
+//					flight.getFlightNumber());
+//			return flight1;
+	
+	}
 	public Flight getFlightById(int id) {
 			try(Connection conn = DriverManager.getConnection(url, username, password)){
 				String sql = "select id,source,destination,departure,arrival, flight_number from flight where id = ?";

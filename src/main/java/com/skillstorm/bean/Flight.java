@@ -36,6 +36,14 @@ public class Flight {
 		this.flightNumber = flightNumber;
 	}
 
+	
+	public Flight(int id, String departure, String arrival) {
+		super();
+		this.id = id;
+		this.departure = departure;
+		this.arrival = arrival;
+	}
+
 
 	public int getId() {
 		return id;
