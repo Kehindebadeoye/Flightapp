@@ -94,11 +94,6 @@ public class FlightDAO {
 				e.printStackTrace();
 			}
 		return flight;
-		
-//			Flight flight1 = new Flight(flight.getId(),flight.getSource(),flight.getDestination(),
-//					flight.getDeparture(),flight.getArrival(),
-//					flight.getFlightNumber());
-//			return flight1;
 	
 	}
 	public Flight getFlightById(int id) {

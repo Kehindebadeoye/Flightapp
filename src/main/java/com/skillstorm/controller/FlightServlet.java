@@ -49,9 +49,8 @@ public class FlightServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (req.getInputStream() != null) {
 			InputStream requestBody = req.getInputStream(); // getting the body of the request
-			Flight flight = new ObjectMapper().readValue(requestBody, Flight.class);// convert the req body to java
-																					// object(Flight)
-			System.out.println(flight);
+			Flight flight = new ObjectMapper().readValue(requestBody, Flight.class);// convert the req body to java																				// object(Flight)
+//			System.out.println(flight);
 //	dao.createFlight(flight);
 			Flight updated = dao.createFlight(flight); // trying to return the updated flight
 			resp.getWriter().print(new ObjectMapper().writeValueAsString(updated));
@@ -84,8 +83,6 @@ public class FlightServlet extends HttpServlet {
 			Flight updatedFlight = dao.updateFlightDepartureAndArrivalDate(flight);
 			
 			resp.getWriter().print(new ObjectMapper().writeValueAsString(updatedFlight));
-//			System.out.println(updatedFlight.getId());
-//			System.out.println(newUpdate);
 		}
 	}
 

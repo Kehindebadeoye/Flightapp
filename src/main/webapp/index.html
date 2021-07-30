@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style.css">-->
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div>
+                    <h1> FLIGHT APP</h1>
+                </div>
+                <form id="new-flight">
+                    <div class="form-group">
+                        <label>SOURCE</label>
+                        <input class="form-control" id="source" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>DESTINATION</label>
+                        <input class="form-control" id="destination" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>DEPARTURE</label>
+                        <input class="form-control" id="departure" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>ARRIVAL</label>
+                        <input class="form-control" id="arrival" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>FLIGHT NUMBER</label>
+                        <input class="form-control" id="flight-number" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary submit-button" id="add-flight"  type="submit" value="Add Flight">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <div>
+                    <h1> VIEW FLIGHT LIST</h1>
+                </div>
+                <table id="flight-data">
+                    <tr>
+                        <th>ID</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Flight Number</th>
+                    </tr>
+                    <!--dynamically populate table data with JS-->
+                    <tr>
+                        <td>id..</td>
+                        <td>source..</td>
+                        <td>destination...</td>
+                        <td>departure...</td>
+                        <td>arrival....</td>
+                        <td>flightNumber</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    // var flight = {};
+
+    // document.addEventListener("DOMcontentLoaded", function () {
+        document.getElementById("new-flight").addEventListener("submit", function(e){
+            e.preventDefault();
+            var cSource = document.getElementById("source").value;
+            var cDestination = document.getElementById("destination").value;
+            var cDeparture = document.getElementById("departure").value;
+            var cArrival = document.getElementById("arrival").value;
+            var cFlightNumber = document.getElementById("flight-number").value;
+            //creating JSON object on the fly ES6+
+            var flight = {
+                source : cSource,
+                destination : cDestination,
+                departure : cDeparture,
+                arrival : cArrival,
+                flightNumber : cFlightNumber
+            };
+            console.log(flight);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 201){
+                    console.log("Success")
+                    var updatedFlights = JSON.parse(xhr.responseText);
+                    addFlightToTable(updatedFlights);
+                }
+            }
+            xhr.open('POST', '/flight-api/api/flight');
+            xhr.send(JSON.stringify(flight));
+        });
+
+        window.onload = function(){
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(xhr.onreadystatechange === 4){
+                    var flightList = JSON.parse(xhr.responseText);
+                    console.log(flightList)
+                    //dom manipulation code
+                    flightList.forEach(flight => {
+                        addFlightToTable(flight);
+                    });
+                }
+            }
+            xhr.open('GET', '/flight-api/api/flight');
+            xhr.send();
+        }
+        function addFlightToTable(flight){
+            var tr = document.createElement('tr');
+            var id = document.createElement('td');
+            var source = document.createElement('td');
+            var destination = document.createElement('td');
+            var departure = document.createElement('rd');
+            var arrival = document.createElement('td')
+            var flightNumber = document.createElement('td');
+            id.innerText = flight.id;
+            source.innerText = flight.source;
+            destination.innerText = flight.destination;
+            departure.innerText = flight.departure;
+            arrival.innerText = flight.arrival;
+            flightNumber.innerText = flight.flightNumber;
+
+            tr.appendChild(id);
+            tr.appendChild(source);
+            tr.appendChild(destination);
+            tr.appendChild(departure);
+            tr.appendChild(arrival);
+            tr.appendChild(flightNumber);
+            document.getElementById("flight-data").appendChild(tr);
+        }
+    // });
+</script>
+
+</html>
