@@ -2,6 +2,7 @@ package com.skillstorm.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +40,9 @@ public class FlightServlet extends HttpServlet {
 			// (its a plain text protocol)
 			resp.getWriter().print(json); // write the data to the response
 		} else {
-			System.out.println("Id cannot be null");
+			Set<Flight> flight = dao.getAllFlights();
+			String json = new ObjectMapper().writeValueAsString(flight);
+			resp.getWriter().print(json);
 		}
 	}
 

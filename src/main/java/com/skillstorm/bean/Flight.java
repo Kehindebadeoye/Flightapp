@@ -2,7 +2,7 @@ package com.skillstorm.bean;
 
 
 
-public class Flight {
+public class Flight implements Comparable<Flight> {
 	private int id;
 	private String source;
 	private String destination;
@@ -163,6 +163,12 @@ public class Flight {
 		} else if (!source.equals(other.source))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public int compareTo(Flight o) {
+		return this.id -o.id;
 	}
 	
 
