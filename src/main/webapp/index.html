@@ -26,6 +26,14 @@
                 <img src="https://static8.depositphotos.com/1361307/921/i/600/depositphotos_9213048-stock-photo-airplane.jpg" alt="Flight logo" width="60" height="40">
                 <h3>KENNY FLIGHT</h3>
             </a>
+            <div class="form-group">
+                <button class="btn btn-primary submit-button" type ="button" id="search">Edit Flight</button>
+            </div>
+            <div>
+                <a href="updateFlight.html">
+                <button class="btn btn-primary submit-button" type ="button" id="search">Cancel Flight</button>
+                </a>
+            </div>
         </div>
     </nav>
 <!------------------------ Header Ends------------------------------------------- -->   
@@ -47,6 +55,7 @@
                         onclick="getFlightById()">search
                     </button>
                 </div>
+                
             </form>
         </div>
     </div>
@@ -57,7 +66,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div>
-                    <h3> ADD NEW FLIGHT</h3>
+                    <h4> ADD NEW FLIGHT</h4>
                 </div>
                 <form id="new-flight">
                     <div class="form-group">
@@ -90,11 +99,11 @@
 
             <div class="col-lg-6">
                 <div>
-                    <h3> VIEW FLIGHT LIST</h3>
+                    <h4> VIEW FLIGHT LIST</h4>
                     <div class="container">
                         <div class="jumbotron">
                             <div class="card">
-                                <h5 class="card-header">Available Flights</h5>
+                                <h5 class="card-header">Flight Details</h5>
                                 <div class="card-body">
                                     <table id="flight-data" class="table table-warning table-striped">
                                         <thead>
@@ -108,7 +117,7 @@
                                             </tr>
                                         </thead>
                                         <!--dynamically populate table data with JS-->
-                                        <!-- <tbody>
+                                        <tbody id="tbody">
                                             <tr class="table-success">
                                                 <td class="table-success"></td>
                                                 <td class="table-success"></td>
@@ -117,7 +126,7 @@
                                                 <td class="table-success"></td>
                                                 <td class="table-success"></td>
                                             </tr>
-                                        </tbody> -->
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -210,12 +219,24 @@
         var departure = document.createElement('td');
         var arrival = document.createElement('td')
         var flightNumber = document.createElement('td');
+        var deleteFl = document.querySelector("tbody");
+        var updateFl = document.querySelector("tbody");
+
         id.innerText = flight.id;
         source.innerText = flight.source;
         destination.innerText = flight.destination;
         departure.innerText = flight.departure;
         arrival.innerText = flight.arrival;
         flightNumber.innerText = flight.flightNumber;
+        deleteFl.innerHTML +=`
+        <tr>
+            <td><button class="deleteBtn" style="color:red">Cancel</button></td>
+            </tr>
+        `;
+        updateFl.innerHTML += `<tr>
+            <td><button class="updateBtn" style="color:green">Update</button></td>
+            </tr>
+        `;
 
         tr.appendChild(id);
         tr.appendChild(source);
@@ -223,14 +244,19 @@
         tr.appendChild(departure);
         tr.appendChild(arrival);
         tr.appendChild(flightNumber);
-
+        tr.appendChild(deleteFl);
+        tr.appendChild(updateFl);
+        
         var emptyTable = document.getElementById("flight-data");
-        emptyTable.innerHTML = "";
+        emptyTable.innerHTML ="";
+       
                
         // document.querySelectorAll("tbody tr").forEach(function(e){e.remove()})
         document.getElementById("flight-data").appendChild(tr);
     }
+
 //--------------------Add Single Flights To Table Starts-------------------------------------
+
 //--------------------Get All Flights Function Starts-------------------------------------
 
     var flight = {};
@@ -286,6 +312,41 @@
 
 //--------------------Get Flights By ID Function Ends-------------------------------------
 
+//--------------------Listening Event to Click on Table-------------------------------------
+
+var tableDel = document.getElementById("flight-data").addEventListener('click', function(e){
+    if(e.target.classList.contains("deleteBtn")){
+        
+       alert('are you sure you want to cancel this flight?')
+        deleteFlight();
+        tableDel.innerText="";
+        
+    }
+})
+
+//......................Delete Flight Function Starts........................................
+function deleteFlight(){
+    var myId = getId();
+    if (Number(myId)) {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+               console.log("Your flight has been canceled")
+               alert('Your flight has been successfully cancelled')
+            }
+        }
+        xhr.open('DELETE', `/flight-api/api/flight?id=${myId}`);
+        xhr.send();
+    }
+
+ }
+//--------------------Listening to Update Event on Table-------------------------------------
+var tableUpd = document.getElementById("flight-data").addEventListener("click", function(e){
+ if(e.target.classList.contains("updateBtn")){
+        window.location = "updateFlight.html"
+ }
+
+})
 
 </script>
 

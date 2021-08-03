@@ -2,3 +2,8 @@
     background-color:khaki;
 
 }
+#bbody{
+    background-image: url("https://assets2.rockpapershotgun.com/microsoft-flight-simulator-pc-graphics-medium-new-york.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/microsoft-flight-simulator-pc-graphics-medium-new-york.jpg");
+    background-repeat: no-repeat, repeat;
+    background-color: #cccccc;
+}
