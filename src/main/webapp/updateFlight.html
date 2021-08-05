@@ -35,8 +35,9 @@ background-color: #cccccc;">
     <div class="container-fluid" id="updfl">
         <div class="row">
             <div class="col-lg-6">
+                <br>
                 <div>
-                    <h4 style="color: darkslateblue;"> Modify Your Flight Details</h4>
+                    <h5 style="color: darkviolet;"> Modify Your Flight Details</h5>
                 </div>
                 <form id="update-flight">
                     <div class="form-group">
@@ -52,11 +53,11 @@ background-color: #cccccc;">
                         <input class="form-control" id="destination" type="text">
                     </div>
                     <div class="form-group">
-                        <label style="color: darkslateblue;">DEPARTURE</label>
+                        <label style="color: darkslateblue;">DEPARTURE DATE</label>
                         <input class="form-control" id="departure" type="text">
                     </div>
                     <div class="form-group">
-                        <label style="color: darkslateblue;">ARRIVAL</label>
+                        <label style="color: darkslateblue;">ARRIVAL DATE</label>
                         <input class="form-control" id="arrival" type="text">
                     </div>
                     <div class="form-group">
@@ -108,7 +109,7 @@ background-color: #cccccc;">
                 console.log("Success")
 
             }
-            alert('Flight modified successfully')
+            // alert('Flight modified successfully')
             document.getElementById("id").value = null;
             document.getElementById("source").value = null;
             document.getElementById("destination").value = null;

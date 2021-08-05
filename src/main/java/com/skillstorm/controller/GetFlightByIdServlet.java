@@ -21,18 +21,11 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 
 		// get flight by id and checking that null is not passed
 		if (req.getParameter("id") != null) {
-			int id = Integer.parseInt(req.getParameter("id")); // the request is coming in as a string hence we need to
-																// parse it to int
-			Flight result = dao.getFlightById(id); // this is a java object which cant be sent over the network except
-													// converted to json
-			String json = new ObjectMapper().writeValueAsString(result);// the binding will be done by
-																		// JacksonBind,JacksonCore,&Jackson annotation
-																		// dependency
+			int id = Integer.parseInt(req.getParameter("id")); 
+			Flight result = dao.getFlightById(id); 
+			String json = new ObjectMapper().writeValueAsString(result);
 			System.out.println(json);
-			// how do i send this back to anyone making this request? getWriter
-			// Note - http is all string so whenever you are sending or receiving its string
-			// (its a plain text protocol)
-			resp.getWriter().print(json); // write the data to the response
+			resp.getWriter().print(json); 
 		} else {
 			Set<Flight> flight = dao.getAllFlights();
 			String json = new ObjectMapper().writeValueAsString(flight);

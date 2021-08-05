@@ -20,12 +20,12 @@ public class FlightTest {
 
 	@Test
 	public void testGetFlightById() {
-		flight = dao.getFlightById(3);
-		assertEquals (3,"CNY", "PHP", "2021-06-09", "2021-07-17", "13668-137", flight);
+		flight = dao.getFlightById(4);
+		assertEquals (4,"MYR", "AZN", "2021-05-20 00:00:00", "2020-07-26 00:00:00", "63629-1396", flight);
 	}
 	@Test
 	public void testGetFlightByFakeId() {
-		flight = dao.getFlightById(3);
+		flight = dao.getFlightById(4);
 		assertFalse (98,"CNY", "PHP", "2021-06-09", "2021-07-17", "13668-137", flight);
 	}
 

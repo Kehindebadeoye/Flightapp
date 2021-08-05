@@ -19,23 +19,20 @@
 
   <!------------------------ Header Starts------------------------------------------- -->
 
-<body style="background-color: rgb(119, 107, 107);">
-    <nav class="navbar navbar-light bg-light">
-        <div id="bobo" class="container" style="display: flex;">
-            <a class="navbar-brand" href="#">
-                <img src="https://static8.depositphotos.com/1361307/921/i/600/depositphotos_9213048-stock-photo-airplane.jpg" alt="Flight logo" width="60" height="40">
-                <h3>KENNY FLIGHT</h3>
-            </a>
-            <div class="form-group">
-                <button class="btn btn-primary submit-button" type ="button" id="search">Edit Flight</button>
-            </div>
-            <div>
-                <a href="updateFlight.html">
-                <button class="btn btn-primary submit-button" type ="button" id="search">Cancel Flight</button>
-                </a>
-            </div>
-        </div>
-    </nav>
+  <body style = "background-image: url('https://twinfinite.net/wp-content/uploads/2019/11/Microsoft-Flight-Simulator-4-1.jpg');
+  background-repeat: no-repeat, repeat;
+  background-color: #cccccc;">
+      <nav class="navbar navbar-light bg-light">
+          <div id="bobo" class="container" style="display: flex;">
+              <a class="navbar-brand" href="#">
+                  <img src="https://static8.depositphotos.com/1361307/921/i/600/depositphotos_9213048-stock-photo-airplane.jpg"
+                      alt="Flight logo" width="60" height="40">
+                  <h3 style="color:darkorange">KENNY FLIGHT</h3>
+                  <p style="font-style: italic;">...Anywhere in the world</p>
+              </a>
+  
+          </div>
+        </nav>
 <!------------------------ Header Ends------------------------------------------- -->   
 
 <!------------------------ Search Form Starts------------------------------------------- -->
@@ -44,18 +41,19 @@
         <div class="row col-lg-6">
             <form id="search-flight">
                 <div class="form-group">
-                    <label for="search-flight" class="form-label">Search Flights</label>
+                    <label for="search-flight" class="form-label">Search/Modify/Cancel Flight</label>
                     <input input class="form-control" id="id" type="text" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">Please Enter Airline Name</div>
+                    <div id="emailHelp" class="form-text" style="color: red;">Please Enter Airline ID</div>
                 </div>
+                <br>
                 <div class="form-group">
                     <!-- <input class="btn btn-primary submit-button" id="search" type="submit" value="Search" > -->
                     <!-- <input class="btn btn-primary submit-button" id="search" type="submit" value="Search" onclick="getFlightById()"> -->
-                    <button class="btn btn-primary submit-button" type="button" id="search"
-                        onclick="getFlightById()">search
+                    <button class="btn btn-primary submit-button" type="button" id="search" style="background-color:darkorange;"
+                        onclick="getFlightById()">Search
                     </button>
                 </div>
-                
+                <br>
             </form>
         </div>
     </div>
@@ -66,7 +64,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div>
-                    <h4> ADD NEW FLIGHT</h4>
+                    <h4 style="color: darkblue;"> ADD NEW FLIGHT</h4>
                 </div>
                 <form id="new-flight">
                     <div class="form-group">
@@ -78,19 +76,20 @@
                         <input class="form-control" id="destination" type="text">
                     </div>
                     <div class="form-group">
-                        <label>DEPARTURE</label>
+                        <label>DEPARTURE DATE</label>
                         <input class="form-control" id="departure" type="text">
                     </div>
                     <div class="form-group">
-                        <label>ARRIVAL</label>
+                        <label>ARRIVAL DATE</label>
                         <input class="form-control" id="arrival" type="text">
                     </div>
                     <div class="form-group">
                         <label>FLIGHT NUMBER</label>
                         <input class="form-control" id="flight-number" type="text">
                     </div>
+                    <br>
                     <div class="form-group">
-                        <input class="btn btn-primary submit-button" id="add-flight" type="submit" value="Add Flight">
+                        <input class="btn btn-primary submit-button" id="add-flight" type="submit" value="Add Flight" style="background-color: darkorange;">
                     </div>
                 </form>
             </div>
@@ -99,7 +98,7 @@
 
             <div class="col-lg-6">
                 <div>
-                    <h4> VIEW FLIGHT LIST</h4>
+                    <h4 style="color: darkblue;"> VIEW FLIGHT LIST</h4>
                     <div class="container">
                         <div class="jumbotron">
                             <div class="card">
@@ -167,7 +166,9 @@
                 console.log("Success")
                 var updatedFlights = JSON.parse(xhr.responseText);
                 addFlightToTable(updatedFlights);
+                document.getElementById("new-flight").reset();
             }
+           
         }
         xhr.open('POST', '/flight-api/api/flight');
         xhr.send(JSON.stringify(flight));
@@ -301,7 +302,7 @@
                     console.log(flightList)
 
                     addSingleFlightToTable(flightList);
-                  
+                  document.getElementById("search").reset();
                 }
             }
             xhr.open('GET', `/flight-api/api/flight/getById?id=${myId}`);
