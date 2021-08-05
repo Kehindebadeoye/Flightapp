@@ -15,27 +15,27 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-  <!------------------------ Body Starts--------------------------------------------- -->
+<!------------------------ Body Starts--------------------------------------------- -->
 
-  <!------------------------ Header Starts------------------------------------------- -->
+<!------------------------ Header Starts------------------------------------------- -->
 
-  <body style = "background-image: url('https://twinfinite.net/wp-content/uploads/2019/11/Microsoft-Flight-Simulator-4-1.jpg');
+<body style="background-image: url('https://twinfinite.net/wp-content/uploads/2019/11/Microsoft-Flight-Simulator-4-1.jpg');
   background-repeat: no-repeat, repeat;
   background-color: #cccccc;">
-      <nav class="navbar navbar-light bg-light">
-          <div id="bobo" class="container" style="display: flex;">
-              <a class="navbar-brand" href="#">
-                  <img src="https://static8.depositphotos.com/1361307/921/i/600/depositphotos_9213048-stock-photo-airplane.jpg"
-                      alt="Flight logo" width="60" height="40">
-                  <h3 style="color:darkorange">KENNY FLIGHT</h3>
-                  <p style="font-style: italic;">...Anywhere in the world</p>
-              </a>
-  
-          </div>
-        </nav>
-<!------------------------ Header Ends------------------------------------------- -->   
+    <nav class="navbar navbar-light bg-light">
+        <div id="bobo" class="container" style="display: flex;">
+            <a class="navbar-brand" href="#">
+                <img src="https://static8.depositphotos.com/1361307/921/i/600/depositphotos_9213048-stock-photo-airplane.jpg"
+                    alt="Flight logo" width="60" height="40">
+                <h3 style="color:darkorange">KENNY FLIGHT</h3>
+                <p style="font-style: italic;">...Anywhere in the world</p>
+            </a>
 
-<!------------------------ Search Form Starts------------------------------------------- -->
+        </div>
+    </nav>
+    <!------------------------ Header Ends------------------------------------------- -->
+
+    <!------------------------ Search Form Starts------------------------------------------- -->
 
     <div class="container-fluid">
         <div class="row col-lg-6">
@@ -47,18 +47,16 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <!-- <input class="btn btn-primary submit-button" id="search" type="submit" value="Search" > -->
-                    <!-- <input class="btn btn-primary submit-button" id="search" type="submit" value="Search" onclick="getFlightById()"> -->
-                    <button class="btn btn-primary submit-button" type="button" id="search" style="background-color:darkorange;"
-                        onclick="getFlightById()">Search
+                    <button class="btn btn-primary submit-button" type="button" id="search"
+                        style="background-color:darkorange;" onclick="getFlightById()">Search
                     </button>
                 </div>
                 <br>
             </form>
         </div>
     </div>
-<!------------------------ Search Form Ends------------------------------------------- -->
-<!------------------------ Create New Flight Form Starts------------------------------------------- -->
+    <!------------------------ Search Form Ends------------------------------------------- -->
+    <!------------------------ Create New Flight Form Starts------------------------------------------- -->
 
     <div class="container-fluid">
         <div class="row">
@@ -89,12 +87,13 @@
                     </div>
                     <br>
                     <div class="form-group">
-                        <input class="btn btn-primary submit-button" id="add-flight" type="submit" value="Add Flight" style="background-color: darkorange;">
+                        <input class="btn btn-primary submit-button" id="add-flight" type="submit" value="Add Flight"
+                            style="background-color: darkorange;">
                     </div>
                 </form>
             </div>
 
-<!------------------------ Flight Display Table Starts------------------------------------------- -->
+            <!------------------------ Flight Display Table Starts------------------------------------------- -->
 
             <div class="col-lg-6">
                 <div>
@@ -168,19 +167,19 @@
                 addFlightToTable(updatedFlights);
                 document.getElementById("new-flight").reset();
             }
-           
+
         }
         xhr.open('POST', '/flight-api/api/flight');
         xhr.send(JSON.stringify(flight));
     });
-//--------------------Window Onload Get All Available Flights Starts-------------------------------------
+    //--------------------Window Onload Get All Available Flights Starts-------------------------------------
     window.onload = function () {
         getAllFlight();
 
     }
-//--------------------Window Onload Get All Available Flights Ends-------------------------------------
+    //--------------------Window Onload Get All Available Flights Ends-------------------------------------
 
-//--------------------Add All Flights To Table Starts-------------------------------------
+    //--------------------Add All Flights To Table Starts-------------------------------------
 
 
     function addFlightToTable(flight) {
@@ -207,9 +206,9 @@
         document.getElementById("flight-data").appendChild(tr);
     }
 
-//--------------------Add All Flights To Table Ends-------------------------------------
+    //--------------------Add All Flights To Table Ends-------------------------------------
 
-//--------------------Add Single Flights To Table Starts-------------------------------------
+    //--------------------Add Single Flights To Table Starts-------------------------------------
 
 
     function addSingleFlightToTable(flight) {
@@ -229,7 +228,7 @@
         departure.innerText = flight.departure;
         arrival.innerText = flight.arrival;
         flightNumber.innerText = flight.flightNumber;
-        deleteFl.innerHTML +=`
+        deleteFl.innerHTML += `
         <tr>
             <td><button class="deleteBtn" style="color:red">Cancel</button></td>
             </tr>
@@ -247,18 +246,18 @@
         tr.appendChild(flightNumber);
         tr.appendChild(deleteFl);
         tr.appendChild(updateFl);
-        
+
         var emptyTable = document.getElementById("flight-data");
-        emptyTable.innerHTML ="";
-       
-               
+        emptyTable.innerHTML = "";
+
+
         // document.querySelectorAll("tbody tr").forEach(function(e){e.remove()})
         document.getElementById("flight-data").appendChild(tr);
     }
 
-//--------------------Add Single Flights To Table Starts-------------------------------------
+    //--------------------Add Single Flights To Table Starts-------------------------------------
 
-//--------------------Get All Flights Function Starts-------------------------------------
+    //--------------------Get All Flights Function Starts-------------------------------------
 
     var flight = {};
 
@@ -278,16 +277,20 @@
         xhr.send();
 
     }
-//--------------------Get All Flights Function Ends-------------------------------------
+    //--------------------Get All Flights Function Ends-------------------------------------
 
-//--------------------Get Input ID Function Starts-------------------------------------
+    //--------------------Get Input ID Function Starts-------------------------------------
     function getId() {
+
         return document.getElementById("id").value;
     }
 
-//--------------------Get Input ID Function Ends-------------------------------------
 
-//--------------------Get Flights By ID Function Starts-------------------------------------
+
+
+    //--------------------Get Input ID Function Ends-------------------------------------
+
+    //--------------------Get Flights By ID Function Starts-------------------------------------
 
     function getFlightById() {
         var myId = getId();
@@ -302,52 +305,53 @@
                     console.log(flightList)
 
                     addSingleFlightToTable(flightList);
-                  document.getElementById("search").reset();
+                    document.getElementById("search").reset;
                 }
             }
+
             xhr.open('GET', `/flight-api/api/flight/getById?id=${myId}`);
             xhr.send();
+        }
+
+    }
+
+    //--------------------Get Flights By ID Function Ends-------------------------------------
+
+    //--------------------Listening Event to Click on Table-------------------------------------
+
+    var tableDel = document.getElementById("flight-data").addEventListener('click', function (e) {
+        if (e.target.classList.contains("deleteBtn")) {
+
+            alert('are you sure you want to cancel this flight?')
+            deleteFlight();
+            tableDel.innerText = "";
 
         }
-    }
+    })
 
-//--------------------Get Flights By ID Function Ends-------------------------------------
-
-//--------------------Listening Event to Click on Table-------------------------------------
-
-var tableDel = document.getElementById("flight-data").addEventListener('click', function(e){
-    if(e.target.classList.contains("deleteBtn")){
-        
-       alert('are you sure you want to cancel this flight?')
-        deleteFlight();
-        tableDel.innerText="";
-        
-    }
-})
-
-//......................Delete Flight Function Starts........................................
-function deleteFlight(){
-    var myId = getId();
-    if (Number(myId)) {
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-               console.log("Your flight has been canceled")
-               alert('Your flight has been successfully cancelled')
+    //......................Delete Flight Function Starts........................................
+    function deleteFlight() {
+        var myId = getId();
+        if (Number(myId)) {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log("Your flight has been canceled")
+                    alert('Your flight has been successfully cancelled')
+                }
             }
+            xhr.open('DELETE', `/flight-api/api/flight?id=${myId}`);
+            xhr.send();
         }
-        xhr.open('DELETE', `/flight-api/api/flight?id=${myId}`);
-        xhr.send();
+
     }
+    //--------------------Listening to Update Event on Table-------------------------------------
+    var tableUpd = document.getElementById("flight-data").addEventListener("click", function (e) {
+        if (e.target.classList.contains("updateBtn")) {
+            window.location = "updateFlight.html"
+        }
 
- }
-//--------------------Listening to Update Event on Table-------------------------------------
-var tableUpd = document.getElementById("flight-data").addEventListener("click", function(e){
- if(e.target.classList.contains("updateBtn")){
-        window.location = "updateFlight.html"
- }
-
-})
+    })
 
 </script>
 
